@@ -1,0 +1,80 @@
+From 76b225434d8db8991d780671303418912dc264c9 Mon Sep 17 00:00:00 2001
+From: Andy Ye <Andy.Ye@rock-chips.com>
+Date: Mon, 8 Aug 2016 11:22:32 +0800
+Subject: [PATCH] sepolicy:add some new class
+
+map with the latest kernel security/selinux/include/classmap.h
+
+Change-Id: Id2794bebb2e86a7e5795d1c062881353dc8203f9
+---
+ access_vectors   | 16 ++++++++++++++++
+ global_macros    |  2 +-
+ security_classes |  5 +++++
+ 3 files changed, 22 insertions(+), 1 deletion(-)
+
+diff --git a/access_vectors b/access_vectors
+index c280f08..255aac4 100644
+--- a/access_vectors
++++ b/access_vectors
+@@ -276,6 +276,21 @@ class netif
+ class netlink_socket
+ inherits socket
+ 
++class netlink_netfilter_socket
++inherits socket
++
++class netlink_generic_socket
++inherits socket
++
++class netlink_scsitransport_socket
++inherits socket
++
++class netlink_rdma_socket
++inherits socket
++
++class netlink_crypto_socket
++inherits socket
++
+ class packet_socket
+ inherits socket
+ 
+@@ -393,6 +408,7 @@ class system
+ 	syslog_mod
+ 	syslog_console
+ 	module_request
++	module_load
+ }
+ 
+ #
+diff --git a/global_macros b/global_macros
+index 8d72868..6a53693 100644
+--- a/global_macros
++++ b/global_macros
+@@ -8,7 +8,7 @@ define(`notdevfile_class_set', `{ file lnk_file sock_file fifo_file }')
+ define(`file_class_set', `{ devfile_class_set notdevfile_class_set }')
+ define(`dir_file_class_set', `{ dir file_class_set }')
+ 
+-define(`socket_class_set', `{ socket tcp_socket udp_socket rawip_socket netlink_socket packet_socket key_socket unix_stream_socket unix_dgram_socket appletalk_socket netlink_route_socket netlink_firewall_socket netlink_tcpdiag_socket netlink_nflog_socket netlink_xfrm_socket netlink_selinux_socket netlink_audit_socket netlink_ip6fw_socket netlink_dnrt_socket netlink_kobject_uevent_socket tun_socket }')
++define(`socket_class_set', `{ socket tcp_socket udp_socket rawip_socket netlink_socket packet_socket key_socket unix_stream_socket unix_dgram_socket appletalk_socket netlink_route_socket netlink_firewall_socket netlink_tcpdiag_socket netlink_nflog_socket netlink_xfrm_socket netlink_selinux_socket netlink_audit_socket netlink_ip6fw_socket netlink_dnrt_socket netlink_kobject_uevent_socket tun_socket netlink_netfilter_socket netlink_generic_socket netlink_scsitransport_socket netlink_rdma_socket netlink_crypto_socket }')
+ define(`dgram_socket_class_set', `{ udp_socket unix_dgram_socket }')
+ define(`stream_socket_class_set', `{ tcp_socket unix_stream_socket }')
+ define(`unpriv_socket_class_set', `{ tcp_socket udp_socket unix_stream_socket unix_dgram_socket }')
+diff --git a/security_classes b/security_classes
+index c0c9659..863ca2a 100644
+--- a/security_classes
++++ b/security_classes
+@@ -31,6 +31,11 @@ class rawip_socket
+ class node
+ class netif
+ class netlink_socket
++class netlink_netfilter_socket
++class netlink_generic_socket
++class netlink_scsitransport_socket
++class netlink_rdma_socket
++class netlink_crypto_socket
+ class packet_socket
+ class key_socket
+ class unix_stream_socket
+-- 
+1.9.1
+

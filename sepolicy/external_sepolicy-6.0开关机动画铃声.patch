@@ -1,0 +1,12 @@
+diff --git a/bootanim.te b/bootanim.te
+index dd1e57a..c0b943c 100644
+--- a/bootanim.te
++++ b/bootanim.te
+@@ -17,3 +17,7 @@ allow bootanim audio_device:dir r_dir_perms;
+ allow bootanim audio_device:chr_file rw_file_perms;
+ 
+ allow bootanim surfaceflinger_service:service_manager find;
++
++allow bootanim mediaserver_service:service_manager find;
++
++allow bootanim system_data_file:file r_file_perms;
