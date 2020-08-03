@@ -412,6 +412,7 @@ out:
 #define REALTEK_MODULE_NAME "[realtek]"
 #define SSV_MODULE_NAME "[ssv]"
 #define ESP_MODULE_NAME "[esp]"
+#define MARVELL_MODULE_NAME "[mvl]"
 static char wifi_type[64] = {0};
 extern int check_wifi_chip_type_string(char *type);
 
@@ -489,6 +490,9 @@ int main(int argc, char *argv[])
 		} else if (0 == strncmp(wifi_type, "ESP", 3)) {
 			wpa_printf(MSG_INFO,"Start esp_wpa_supplicant\n");
 			ret = read_wpa_param_config(ESP_MODULE_NAME,argv[1]);
+		} else if (0 == strncmp(wifi_type, "MVL", 3)) {
+			wpa_printf(MSG_INFO,"Start mrvl_wpa_supplicant\n");
+			ret = read_wpa_param_config(MARVELL_MODULE_NAME,argv[1]);
 		} else {
 			wpa_printf(MSG_INFO,"Start wpa_supplicant\n");
 			sprintf(module_type,"[%s]",wifi_type);
